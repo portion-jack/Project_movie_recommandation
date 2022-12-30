@@ -10,5 +10,4 @@ def recommand_with_genres(df_main,n,genres):
     data_4genreDF['genres']=data_4genreDF['genres'].apply(lambda x: x.split('|'))
     merged_recommand=pd.merge(rc_general,data_4genreDF.loc[:,['title','genres']],right_on='title',left_on='iid')
     result=merged_recommand[merged_recommand['genres'].apply(lambda x: True if len(set(genres)-set(x))==0 else False)].nlargest(n,'est').reset_index(drop=True)
-    result.loc[:,['title','est','genres']]
-    return result
+    return result.loc[:,['title','est','genres']]

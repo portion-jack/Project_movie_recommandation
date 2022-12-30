@@ -26,4 +26,4 @@ def recommand_general(df_main,n):
     else:
         temp=pd.DataFrame(preds).drop(columns=['r_ui','details','uid']).groupby('iid').mean('est').nlargest(n,'est').reset_index()
         result=pd.concat([temp['iid'].map(id_title_mapper),temp['est']],axis=1)
-        return result
+        return result.rename(columns={'iid':'title'})

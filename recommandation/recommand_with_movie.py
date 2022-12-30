@@ -28,7 +28,7 @@ def recommand_with_movies(df_main,n,movies):
     generally_recommanded=recommand_general(data,0)
     # result=generally_recommanded[generally_recommanded['iid'].isin(recommand_with_movies(df_main,10,_seen_movies).index)]
     result=generally_recommanded[generally_recommanded['iid'].isin(_seen_movies.index)]\
-           .nlargest(n,'est').reset_index()
-    return result
+           .nlargest(n,'est').reset_index(drop=True)
+    return result.rename(columns={'iid':'title'})
 
 # simillar_movies(df_main,20,_seen_movies)
