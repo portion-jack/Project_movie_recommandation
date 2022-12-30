@@ -1,15 +1,5 @@
-## recommandation algorith
+# Recommendation System
 
-```
-1. in general
-2. with genre data
-3. with movie data
-4. with user_id (has rating, seen_movie, genre)
-
-```
-
-
-### Repo structure
 ```
 .
 ├── README.md
@@ -17,15 +7,15 @@
 ├── data
 │   ├── movies.csv
 │   └── ratings.csv
-├── recommand_by_genre.ipynb
-├── recommand_by_movie.ipynb
-├── recommand_by_userid.ipynb
-├── recommand_generaly.ipynb
+├── 1. recommand_generaly.ipynb
+├── 2. recommand_by_genre.ipynb
+├── 3. recommand_by_movie.ipynb
+├── 4. recommand_by_userid.ipynb
 ├── recommandation
-│   ├── recommand_general.py
-│   ├── recommand_with_genre.py
-│   ├── recommand_with_movie.py
-│   └── recommand_with_userid.py
+│   ├── 1_code. recommand_general.py
+│   ├── 2_code. recommand_with_genre.py
+│   ├── 3_code. recommand_with_movie.py
+│   └── 4_code. recommand_with_userid.py
 └── utils
     └── get_data.py
 

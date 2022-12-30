@@ -10,6 +10,7 @@ from surprise import Reader, Dataset
 from surprise.model_selection import train_test_split
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import Counter
+
 def user_unseen_movie(df_main,user_id):
     result=df_main[~df_main['title'].isin(df_main[df_main['userId']==user_id]['title'].values)]
     return result['movieId'].unique()
@@ -78,21 +79,21 @@ def recommand_user_id_genres(df_main,user_id):
     result3=result.loc[:,['title','est','genres']]
     return result3
 
-def recommand_user_id_ensemble(df_main,user_id,n):
+def recommand_user_id_ensemble(df_main,user_id,n,weights=(0,0,0)):
     # id svd
     result1 = recommand_user_id_svd(df_main,user_id)
-    result1['point'] = result1.index[::-1]
+    result1['point'] = result1.index[::-1] * (1+weights[0])
     
     rc_general=recommand_general(df_main,0)
     est_mapper=rc_general.set_index('iid')['est'].to_dict()
     
     # id simmilar movies
     result2 = recommand_user_id_movie(df_main,user_id)
-    result2['point'] = result2.index[::-1]
+    result2['point'] = result2.index[::-1] * (1+weights[1])
     
     # id simmilar genres
     result3 = recommand_user_id_genres(df_main,user_id)
-    result3['point'] = result3.index[::-1]
+    result3['point'] = result3.index[::-1] * (1+weights[2])
     
     result=pd.concat(
         [
